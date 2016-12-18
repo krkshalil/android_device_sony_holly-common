@@ -23,6 +23,5 @@ TODO:
 
 	- Fix Camera
 	- Fix NFC
-	- Fix Audio
         - Fix Ril
 
