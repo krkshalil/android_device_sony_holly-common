@@ -1,11 +1,11 @@
 on boot
     setprop sys.usb.vid 2717
-    write /sys/class/android_usb/android0/iManufacturer Xiaomi
+    write /sys/class/android_usb/android0/iManufacturer Sony
     write /sys/class/android_usb/android0/iProduct ${ro.product.model}
     write /sys/class/android_usb/android0/iSerial ${ro.serialno}
     write /sys/class/android_usb/android0/f_rndis/wceis 1
-    write /sys/class/android_usb/android0/f_rndis/manufacturer Xiaomi
-    write /sys/class/android_usb/android0/f_rndis/vendorID ${sys.usb.vid}
+    write /sys/class/android_usb/android0/f_rndis/manufacturer ${ro.product.manufacturer}
+    write /sys/class/android_usb/android0/f_rndis/vendorID 0fce
     chown system system /sys/class/android_usb/android0/f_acm/port_index
     chmod 0660 /sys/class/android_usb/android0/f_acm/port_index
 
@@ -30,7 +30,7 @@ on property:sys.usb.config=acm
 on property:sys.usb.config=adb
     write /sys/class/android_usb/android0/enable 0
     write /sys/class/android_usb/android0/idVendor ${sys.usb.vid}
-    write /sys/class/android_usb/android0/idProduct ff08
+    write /sys/class/android_usb/android0/idProduct 201C
     write /sys/class/android_usb/android0/functions ${sys.usb.config}
     write /sys/class/android_usb/android0/enable 1
     start mdbd
