@@ -14,26 +14,32 @@
  * limitations under the License.
  */
 
-#define LOG_TAG "MTKPower-xen0n"
+#define LOG_TAG "MTKPower"
 
 #include <errno.h>
 #include <string.h>
 #include <fcntl.h>
+#include <dlfcn.h>
+#include <stdlib.h>
 #include <unistd.h>
 #include <sys/types.h>
 #include <sys/stat.h>
 
+#include <utils/Log.h>
 #include <cutils/log.h>
 #include <cutils/properties.h>
-
+#include <hardware/hardware.h>
+#include <hardware/power.h>
+#include <pthread.h>
+#include <hardware/hardware.h>
 #include <hardware/power.h>
 #include "power-feature.h"
 
-#define GESTURE_CONTROL_PATH "/sys/lenovo_tp_gestures"
-#define DOUBLE_TAP_TO_WAKE_ENABLE_VALUE "00020001"
-#define DOUBLE_TAP_TO_WAKE_DISABLE_VALUE "00010000"
+#define GESTURE_CONTROL_PATH "/sys/lenovo_tp_gestures/tpd_suspend_status"
+#define DOUBLE_TAP_TO_WAKE_ENABLE_VALUE "1"
+#define DOUBLE_TAP_TO_WAKE_DISABLE_VALUE "0"
 
-#define DOUBLE_TAP_TO_WAKE_STORE_PROP "persist.cmhw.mz_taptowake"
+#define DOUBLE_TAP_TO_WAKE_STORE_PROP "persist.cmhw.mt675x_taptowake"
 #define DOUBLE_TAP_TO_WAKE_STORE_DEFAULT 0
 
 
@@ -52,7 +58,7 @@ static int _taptowake_write_control_file(int enabled)
 
     /* let's be lazy and hard-code the length as it won't ever change */
     buf = enabled ? DOUBLE_TAP_TO_WAKE_ENABLE_VALUE : DOUBLE_TAP_TO_WAKE_DISABLE_VALUE;
-    ret = write(fd, buf, 8);
+    ret = write(fd, buf, 1);
     if (ret < 0) {
         int errsv = errno;
         ALOGE("%s: write control file failed: %s", __func__, strerror(errsv));
