@@ -149,7 +149,6 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/ramdisk/meta_init.project.rc:root/meta_init.project.rc \
     $(LOCAL_PATH)/ramdisk/meta_init.rc:root/meta_init.rc \
     $(LOCAL_PATH)/ramdisk/ueventd.mt6795.rc:root/ueventd.mt6795.rc \
-    $(LOCAL_PATH)/ramdisk/init.volte.rc:root/init.volte.rc \
     $(LOCAL_PATH)/ramdisk/init.mal.rc:root/init.mal.rc \
 
 #NFC permissions
